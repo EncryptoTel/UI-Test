@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="LoginPage" verbose="2">
+    <test name="WIN10 Chrome">
+        <parameter name="platform" value="WIN10"/>
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="version" value="66.0.3359.139"/>
+        <classes>
+            <class name="encry.LoginPageTest"/>
+        </classes>
+    </test>
+</suite>
