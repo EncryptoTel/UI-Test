@@ -4,6 +4,7 @@ import encry.pages.SignUpPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
@@ -13,9 +14,9 @@ public class SignUpTest extends TestNgTestBase {
     private SignUpPage signUpPage;
     private Expectations expectations;
 
-//    @Parameters({"platform", "browserName", "version"})
+    @Parameters({"platform", "browserName", "version"})
     @BeforeMethod
-    public void initPageObjects(/*String platform, String browserName, String version*/) {
+    public void initPageObjects(String platform, String browserName, String version) {
         signUpPage = PageFactory.initElements(driver, SignUpPage.class);
         expectations = PageFactory.initElements(driver, Expectations.class);
     }

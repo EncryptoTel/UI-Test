@@ -17,9 +17,9 @@ public class LoginPageTest extends TestNgTestBase {
     private LoginPage loginPage;
     private Expectations expectations;
 
-//    @Parameters({"platform", "browserName", "version"})
+    @Parameters({"platform", "browserName", "version"})
     @BeforeMethod
-    public void initPageObjects(/*String platform, String browserName, String version*/) {
+    public void initPageObjects(String platform, String browserName, String version) {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         expectations = PageFactory.initElements(driver, Expectations.class);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

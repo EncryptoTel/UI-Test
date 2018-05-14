@@ -5,6 +5,7 @@ import encry.pages.LoginPage;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
@@ -18,9 +19,9 @@ public class ForgotPasswordTest extends TestNgTestBase {
     private LoginPage loginPage;
     private ForgotPasswordPage forgotPasswordPage;
 
-//    @Parameters({"platform", "browserName", "version"})
+    @Parameters({"platform", "browserName", "version"})
     @BeforeMethod
-    public void initPageObjects(/*String platform, String browserName, String version*/) {
+    public void initPageObjects(String platform, String browserName, String version) {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         forgotPasswordPage = PageFactory.initElements(driver, ForgotPasswordPage.class);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -42,14 +43,5 @@ public class ForgotPasswordTest extends TestNgTestBase {
         driver.get(baseUrl +"/password-recovery");
         assertTrue(forgotPasswordPage.isElementVisibleBtnSubmit());
     }
-
-    /*@Features("ForgotPasswordPage")
-    @Stories("Delete User")
-    @Test(priority = 1)
-    public void authentification_loginIncorrect() {
-        String message = response(postDataLogin(), pathLogin, 400);
-        Assert.assertEquals(message, "User not found.");
-    }*/
-
 
 }
