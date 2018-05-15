@@ -212,7 +212,7 @@
     <profile>
       <id>devhost</id>
       <properties>
-        <site.url>http://devhost/</site.url>
+        <site.url>http://pbx-front-dev.encry.ru</site.url>
       </properties>
     </profile>
     <profile>

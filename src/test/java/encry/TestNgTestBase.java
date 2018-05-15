@@ -43,6 +43,7 @@ public class TestNgTestBase {
   @BeforeMethod
   public void initWebDriver() {
     driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);
+    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     driver.manage().window().setSize(new Dimension(1600, 900));
   }
 

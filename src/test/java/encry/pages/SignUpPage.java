@@ -5,10 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@SuppressWarnings("ALL")
 public class SignUpPage extends Page {
 
     public static WebDriver driver;
     private static WebElement element;
+
+    @FindBy(css = "#logo_EncryptoTel")
+    private WebElement logotype;
 
     @FindBy(css = "input[name='Name']")
     private WebElement firstName;
@@ -22,11 +26,23 @@ public class SignUpPage extends Page {
     @FindBy(css = "input[name='Confirm password']")
     private WebElement confirmPassword;
 
+    @FindBy(css = "div:nth-child(5)")
+    private WebElement textTariffPlan;
+
+    @FindBy(css = "div:nth-child(7)")
+    private WebElement textAlreadyHaveAccount;
+
     @FindBy(css = "button.button.accent")
     private WebElement btnSignUp;
 
-    @FindBy(css = "a.auth_form_link[routerlink='tariff_plans']")
+    @FindBy(css = "button > span")
+    private WebElement spanSignUp;
+
+    @FindBy(css = "div > a.auth_form_link")
     private WebElement linkTariffPlans;
+
+    @FindBy(css = "form > a")
+    private WebElement linkSignIn;
 
     @FindBy(css = "div.auth_form_message")
     private WebElement messageCreateUser;
@@ -62,56 +78,66 @@ public class SignUpPage extends Page {
         return message;
     }
 
-    public boolean isElementVisibleFieldFirstName() {
-        if(isElementVisible(firstName, 3)){
+    public boolean isElementVisibleLogotype() {
+        if (isElementVisible(logotype, 3)) {
             return true;
+        } else {
+            return false;
         }
-        else {
+    }
+
+    public boolean isElementVisibleFieldFirstName() {
+        if (isElementVisible(firstName, 3)) {
+            return true;
+        } else {
             return false;
         }
     }
 
     public boolean isElementVisibleFieldEmail() {
-        if(isElementVisible(email, 3)){
+        if (isElementVisible(email, 3)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public boolean isElementVisibleFieldPassword() {
-        if(isElementVisible(password, 3)){
+        if (isElementVisible(password, 3)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public boolean isElementVisibleFieldConfirmPassword() {
-        if(isElementVisible(confirmPassword, 3)){
+        if (isElementVisible(confirmPassword, 3)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public boolean isElementVisibleFieldBtnSignUp() {
-        if(isElementVisible(btnSignUp, 3)){
+        if (isElementVisible(btnSignUp, 3)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public boolean isElementVisibleFieldLinkTariffPlans() {
-        if(isElementVisible(linkTariffPlans, 3)){
+        if (isElementVisible(linkTariffPlans, 3)) {
             return true;
+        } else {
+            return false;
         }
-        else {
+    }
+
+    public boolean isElementVisibleFieldLinkSignIn() {
+        if (isElementVisible(linkSignIn, 3)) {
+            return true;
+        } else {
             return false;
         }
     }
@@ -134,6 +160,29 @@ public class SignUpPage extends Page {
     public String getPlaceholderConfirmPassword() {
         Expectations.wFormAuth();
         return getPlaceholder(confirmPassword);
+    }
+
+    public String getTextBtnSignUp() {
+//        return spanSignUp.getAttribute("innerText").contains(text);
+        return getInnerText(spanSignUp);
+    }
+
+    public String getTextTariffPlan() {
+//        return textTariffPlan.getAttribute("innerText").contains(text);
+        return getInnerText(textTariffPlan);
+    }
+
+    public String getLinkTariffPlan() {
+//        return linkTariffPlans.getAttribute("innerText").contains(text);
+        return getInnerText(linkTariffPlans);
+    }
+
+    public String getLinkSignIn() {
+        return getInnerText(linkSignIn);
+    }
+
+    public String getTextAlreadyHaveAccount() {
+        return getInnerText(textAlreadyHaveAccount);
     }
 
     public SignUpPage(WebDriver driver) {

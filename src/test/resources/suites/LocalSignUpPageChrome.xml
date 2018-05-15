@@ -6,7 +6,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="version" value="65.0.3325.181"/>
         <classes>
-            <class name="encry.LoginPageTest"/>
+            <class name="encry.SignUpTest"/>
         </classes>
     </test>
 </suite>

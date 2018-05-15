@@ -37,6 +37,10 @@ public abstract class Page {
     return placeholder;
   }
 
+  String getInnerText(WebElement element) {
+    return element.getAttribute("innerText").toString();
+  }
+
   /*
    * Constructor injecting the WebDriver interface
    * 

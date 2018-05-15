@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="LoginPage" verbose="5">
+    <test name="LoginPageLinuxChrome">
+        <parameter name="platform" value="LINUX"/>
+        <parameter name="browserName" value="opera"/>
+        <parameter name="version" value="65.0.3325.181"/>
+        <classes>
+            <class name="encry.LoginPageTest"/>
+        </classes>
+    </test>
     <test name="LoginPageWin10Chrome">
         <parameter name="platform" value="WIN10"/>
-        <parameter name="browserName" value="chrome"/>
+        <parameter name="browserName" value="opera"/>
         <parameter name="version" value="65.0.3325.181"/>
         <classes>
             <class name="encry.LoginPageTest"/>

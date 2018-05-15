@@ -22,8 +22,6 @@ public class LoginPageTest extends TestNgTestBase {
     public void initPageObjects(String platform, String browserName, String version) {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         expectations = PageFactory.initElements(driver, Expectations.class);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().window().setSize(new Dimension(1600, 900));
     }
 
     @Stories("LoginPage")
