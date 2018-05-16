@@ -1,10 +1,10 @@
 package encry;
 
 import encry.pages.SignUpPage;
+import encry.pages.TempMail;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
@@ -12,12 +12,14 @@ import ru.yandex.qatools.allure.annotations.Stories;
 public class SignUpTest extends TestNgTestBase {
 
     private SignUpPage signUpPage;
+    private TempMail tempMail;
     private Expectations expectations;
 
     //    @Parameters({"platform", "browserName", "version"})
     @BeforeMethod
     public void initPageObjects(/*String platform, String browserName, String version*/) {
         signUpPage = PageFactory.initElements(driver, SignUpPage.class);
+        tempMail = PageFactory.initElements(driver, TempMail.class);
         expectations = PageFactory.initElements(driver, Expectations.class);
     }
 
@@ -122,7 +124,7 @@ public class SignUpTest extends TestNgTestBase {
     @Test(priority = 12)
     public void checkTextTariff() {
         driver.get(baseUrl + "/sign-up");
-        Assert.assertEquals(signUpPage.getTextTariffPlan(), "Your tariff plan is Basic (Free). \n" + "Change it?\n");
+        Assert.assertEquals(signUpPage.getTextAreaTariffPlan(), "Your tariff plan is Basic (Free). \n" + "Change it?\n");
     }
 
     @Stories("SignUp")
@@ -146,7 +148,7 @@ public class SignUpTest extends TestNgTestBase {
     @Test(priority = 14)
     public void checkTextAlreadyHaveAccount() {
         driver.get(baseUrl + "/sign-up");
-        Assert.assertEquals(signUpPage.getTextAlreadyHaveAccount(), "Already have an EncryptoTel Account?");
+        Assert.assertEquals(signUpPage.getTextAreaAlreadyHaveAccount(), "Already have an EncryptoTel Account?");
     }
 
     @Stories("SignUp")
@@ -160,9 +162,57 @@ public class SignUpTest extends TestNgTestBase {
     @Stories("SignUp")
     @Features("Check Elements")
     @Test(priority = 16)
-    public void checkLinkRoute() {
-        /*driver.get(baseUrl + "/sign-up");
-        Assert.assertEquals(signUpPage.getLinkSignIn(), "Sign in now");*/
+    public void checkRouteLinkChangeTariff() {
+        driver.get(baseUrl + "/sign-up");
+        Assert.assertEquals(signUpPage.getRouteLinkTariffPlan(), "tariff_plans");
+    }
+
+    @Stories("SignUp")
+    @Features("Check Elements")
+    @Test(priority = 16)
+    public void checkRouteLinkSignIn() {
+        driver.get(baseUrl + "/sign-up");
+        Assert.assertEquals(signUpPage.getRouteLinkSignIn(), "../sign-in");
+    }
+
+    @Stories("SignUp")
+    @Features("Check Elements")
+    @Test(priority = 16)
+    public void checkHrefLinkChangeTariff() {
+        driver.get(baseUrl + "/sign-up");
+        Assert.assertEquals(signUpPage.getHrefLinkTariffPlan(), "http://pbx-front-dev.encry.ru/sign-up/tariff_plans");
+    }
+
+    @Stories("SignUp")
+    @Features("Check Elements")
+    @Test(priority = 16)
+    public void checkHrefLinkSignIn() {
+        driver.get(baseUrl + "/sign-up");
+        Assert.assertEquals(signUpPage.getHrefLinkSignIn(), "http://pbx-front-dev.encry.ru/sign-in");
+    }
+
+    @Stories("SignUp")
+    @Features("Check Elements")
+    @Test(priority = 17)
+    public void checkLinkSignIn() {
+        driver.get(baseUrl + "/sign-up");
+        signUpPage.goToSignIn();
+        Assert.assertEquals(driver.getCurrentUrl(), "http://pbx-front-dev.encry.ru/sign-in");
+    }
+
+    @Stories("SignUp")
+    @Features("Register")
+    @Test(priority = 17)
+    public void registerTemp() throws InterruptedException {
+        driver.get(baseUrl + "/sign-up");
+        openTab();
+        driver.get(tempEmail);
+        switchToWindow(parentHandler);
+        signUpPage.typeFirstName("testName");
+        System.out.println(tempMail.tempEmail());
+        signUpPage.typeEmail();
+        Thread.sleep(3000);
+
     }
 
 }

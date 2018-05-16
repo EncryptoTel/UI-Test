@@ -41,6 +41,10 @@ public class Expectations extends TestNgTestBase {
         element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.auth_form_message")));
     }
 
+    public static void wTempMail() {
+        element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.well.well-sm.text-center")));
+    }
+
     public Expectations(WebDriver driver) {
         Expectations.driver = driver;
     }

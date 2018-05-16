@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.*;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -28,7 +25,10 @@ public class TestNgTestBase {
   protected static String baseUrl;
   protected static Capabilities capabilities;
 
-  protected WebDriver driver;
+  protected static WebDriver driver;
+  static String parentHandler;
+  static String currentHandler;
+  static String tempEmail = "https://dropmail.me/ru/";
 
   @BeforeSuite
   public void initTestSuite() throws IOException {
@@ -57,19 +57,32 @@ public class TestNgTestBase {
     WebDriverPool.DEFAULT.dismissAll();
   }
 
-  /*boolean isElementVisible(WebElement webElement, int timeOut) {
-    boolean isElementVisible = false;
-    WebDriverWait wait = new WebDriverWait(driver, timeOut);
-    if (timeOut < HeartbeatMessage.DEFAULT_TIMEOUT || timeOut < 2){
-      driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+  public static void openTab() {
+    parentHandler();
+    ((JavascriptExecutor) driver).executeScript("window.open();");
+    switchTab();
+    currentHandler();
+  }
+
+  static void parentHandler() {
+    parentHandler = driver.getWindowHandle();
+    System.out.println("parentHandler: " + parentHandler);
+  }
+
+  static void currentHandler() {
+    currentHandler = driver.getWindowHandle();
+    System.out.println("currentHandler: " + currentHandler);
+  }
+
+  static void switchTab() {
+    for (String winHandle : driver.getWindowHandles()) {
+      driver.switchTo().window(winHandle);
     }
-    try {
-      wait.until(ExpectedConditions.visibilityOf(webElement));
-      isElementVisible =  true;
-    } finally {
-      driver.manage().timeouts()
-              .implicitlyWait(HeartbeatMessage.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-    }
-    return isElementVisible;
-  }*/
+  }
+
+  static void switchToWindow(String handle) {
+    driver.switchTo().window(handle);
+    System.out.println("Switch to: " + handle);
+  }
+
 }

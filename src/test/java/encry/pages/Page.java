@@ -1,6 +1,6 @@
 package encry.pages;
 
-import encry.Expectations;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class Page {
 
-  protected WebDriver driver;
+  protected static WebDriver driver;
 
   boolean isElementVisible(WebElement webElement, int timeOut) {
     boolean isElementVisible = false;
@@ -33,7 +33,7 @@ public abstract class Page {
   }
 
   String getPlaceholder(WebElement element) {
-    String placeholder = element.getAttribute("placeholder");
+    String placeholder = element.getAttribute("placeholder").toString();
     return placeholder;
   }
 
@@ -41,11 +41,16 @@ public abstract class Page {
     return element.getAttribute("innerText").toString();
   }
 
-  /*
-   * Constructor injecting the WebDriver interface
-   * 
-   * @param webDriver
-   */
+  String getRouterLink(WebElement element) {
+    String placeholder = element.getAttribute("routerlink").toString();
+    return placeholder;
+  }
+
+  String getHref(WebElement element) {
+    String placeholder = element.getAttribute("href").toString();
+    return placeholder;
+  }
+
   public Page(WebDriver driver) {
     this.driver = driver;
   }
